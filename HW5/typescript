@@ -1,0 +1,12 @@
+Script started on 2020-02-23 15:57:57+0300
+]0;ivan@ivan-pc: ~/gitprojects/turbo-fire/HW5[01;32mivan@ivan-pc[00m:[01;34m~/gitprojects/turbo-fire/HW5[00m$ exit./ionice.sh
+
+realtime process time 11 sec.
+
+idle process time 15 sec.
+
+^C
+]0;ivan@ivan-pc: ~/gitprojects/turbo-fire/HW5[01;32mivan@ivan-pc[00m:[01;34m~/gitprojects/turbo-fire/HW5[00m$ exit
+exit
+
+Script done on 2020-02-23 15:58:27+0300
