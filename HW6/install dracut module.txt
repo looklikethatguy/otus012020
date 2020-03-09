@@ -1,0 +1,245 @@
+Script started on 2020-03-09 15:06:23+0300
+]0;ivan@ivna-pc: ~/gitprojects/turbo-fire/HW6[01;32mivan@ivna-pc[00m:[01;34m~/gitprojects/turbo-fire/HW6[00m$ vagrq[Kant ssh
+Last failed login: Mon Mar  9 11:38:09 UTC 2020 on tty1
+There were 3 failed login attempts since the last successful login.
+]0;vagrant@localhost:~[?1034h[vagrant@localhost ~]$ sudo su
+]0;root@localhost:/home/vagrant[?1034h[root@localhost vagrant]# mkdir /usr/lib/dracut/modules.d/01test
+]0;root@localhost:/home/vagrant[root@localhost vagrant]# cd /usr/lib/dracut/modules.d/01test/
+]0;root@localhost:/usr/lib/dracut/modules.d/01test[root@localhost 01test]# ll
+total 0
+]0;root@localhost:/usr/lib/dracut/modules.d/01test[root@localhost 01test]# vi module_setup.sh
+[?1049h[?1h=[1;45r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[45;1H"module_setup.sh" [New File][2;1H[94m~                                                                                                                                                                                                [3;1H~                                                                                                                                                                                                [4;1H~                                                                                                                                                                                                [5;1H~                                                                                                                                                                                                [6;1H~                                                                                                                                                                                                [7;1H~                                                                                                                                                                                                [8;1H~                                                                                                                                                                                                [9;1H~                                                                                                                                                                                                [10;1H~                                                                                                                                                                                                [11;1H~                                                                                                                                                                                                [12;1H~                                                                                                                                                                                                [13;1H~                                                                                                                                                                                                [14;1H~                                                                                                                                                                                                [15;1H~                                                                                                                                                                                                [16;1H~                                                                                                                                                                                                [17;1H~                                                                                                                                                                                                [18;1H~                                                                                                                                                                                                [19;1H~                                                                                                                                                                                                [20;1H~                                                                                                                                                                                                [21;1H~                                                                                                                                                                                                [22;1H~                                                                                                                                                                                                [23;1H~                                                                                                                                                                                                [24;1H~                                                                                                                                                                                                [25;1H~                                                                                                                                                                                                [26;1H~                                                                                                                                                                                                [27;1H~                                                                                                                                                                                                [28;1H~                                                                                                                                                                                                [29;1H~                                                                                                                                                                                                [30;1H~                                                                                                                                                                                                [31;1H~                                                                                                                                                                                                [32;1H~                                                                                                                                                                                                [33;1H~                                                                                                                                                                                                [34;1H~                                                                                                                                                                                                [35;1H~                                                                                                                                                                                                [36;1H~                                                                                                                                                                                                [37;1H~                                                                                                                                                                                                [38;1H~                                                                                                                                                                                                [39;1H~                                                                                                                                                                                                [40;1H~                                                                                                                                                                                                [41;1H~                                                                                                                                                                                                [42;1H~                                                                                                                                                                                                [43;1H~                                                                                                                                                                                                [44;1H~                                                                                                                                                                                                [1;1H[?12l[?25h[?25l[m[45;1H[1m-- INSERT --[m[45;13H[K[1;1H[?12l[?25h[?25l#!/bin/bash[2;1H[K[3;1Hcheck() {[3;10H[K[4;1H    return 0[4;13H[K[5;1H}[5;2H[K[6;1H[K[7;1Hdepends() {[7;12H[K[8;1H    return 0[8;13H[K[9;1H}[9;2H[K[10;1H[K[11;1Hinstall() {[11;12H[K[12;1H    inst_hook cleanup 00 "${moddir}/test.sh"[12;45H[K[13;1H}[13;2H[K[13;2H[?12l[?25h[45;1H[K[13;1H[?25l[?12l[?25h[?25l[45;1H:[?12l[?25hwq[?25l"module_setup.sh" [New] 13L, 126C written
+[?1l>[?12l[?25h[?1049l]0;root@localhost:/usr/lib/dracut/modules.d/01test[root@localhost 01test]# cat module_setup.sh 
+#!/bin/bash
+
+check() {
+    return 0
+}
+
+depends() {
+    return 0
+}
+
+install() {
+    inst_hook cleanup 00 "${moddir}/test.sh"
+}
+]0;root@localhost:/usr/lib/dracut/modules.d/01test[root@localhost 01test]# vi test.sh
+[?1049h[?1h=[1;45r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[45;1H"test.sh" [New File][2;1H[94m~                                                                                                                                                                                                [3;1H~                                                                                                                                                                                                [4;1H~                                                                                                                                                                                                [5;1H~                                                                                                                                                                                                [6;1H~                                                                                                                                                                                                [7;1H~                                                                                                                                                                                                [8;1H~                                                                                                                                                                                                [9;1H~                                                                                                                                                                                                [10;1H~                                                                                                                                                                                                [11;1H~                                                                                                                                                                                                [12;1H~                                                                                                                                                                                                [13;1H~                                                                                                                                                                                                [14;1H~                                                                                                                                                                                                [15;1H~                                                                                                                                                                                                [16;1H~                                                                                                                                                                                                [17;1H~                                                                                                                                                                                                [18;1H~                                                                                                                                                                                                [19;1H~                                                                                                                                                                                                [20;1H~                                                                                                                                                                                                [21;1H~                                                                                                                                                                                                [22;1H~                                                                                                                                                                                                [23;1H~                                                                                                                                                                                                [24;1H~                                                                                                                                                                                                [25;1H~                                                                                                                                                                                                [26;1H~                                                                                                                                                                                                [27;1H~                                                                                                                                                                                                [28;1H~                                                                                                                                                                                                [29;1H~                                                                                                                                                                                                [30;1H~                                                                                                                                                                                                [31;1H~                                                                                                                                                                                                [32;1H~                                                                                                                                                                                                [33;1H~                                                                                                                                                                                                [34;1H~                                                                                                                                                                                                [35;1H~                                                                                                                                                                                                [36;1H~                                                                                                                                                                                                [37;1H~                                                                                                                                                                                                [38;1H~                                                                                                                                                                                                [39;1H~                                                                                                                                                                                                [40;1H~                                                                                                                                                                                                [41;1H~                                                                                                                                                                                                [42;1H~                                                                                                                                                                                                [43;1H~                                                                                                                                                                                                [44;1H~                                                                                                                                                                                                [1;1H[?12l[?25h[?25l[m[45;1H[1m-- INSERT --[m[45;13H[K[1;1H[?12l[?25h[?25l#!/bin/bash[2;1H[K[3;1Hexec 0<>/dev/console 1<>/dev/console 2<>/dev/console[3;53H[K[4;1Hcat <<'msgend'[4;15H[K[5;1HHello! You are in dracut module![5;33H[K[6;1H ___________________[6;21H[K[7;1H< I'm dracut module >[7;22H[K[8;1H -------------------[8;21H[K[9;1H   \[9;5H[K[10;1H    \[10;6H[K[11;1H        .--.[11;13H[K[12;1H       |o_o |[12;14H[K[13;1H       |:_/ |[13;14H[K[14;1H      //   \ \[14;15H[K[15;1H     (|     | )[15;16H[K[16;1H    /'\_   _/`\[16;16H[K[17;1H    \___)=(___/[17;16H[K[18;1Hmsgend[18;7H[K[19;1Hsleep 10[19;9H[K[20;1Hecho " continuing...."[20;23H[K[20;23H[?12l[?25h[45;1H[K[20;22H[?25l[?12l[?25h[?25l[45;1H:[?12l[?25hwq[?25l"test.sh" [New] 20L, 332C written
+[?1l>[?12l[?25h[?1049l]0;root@localhost:/usr/lib/dracut/modules.d/01test[root@localhost 01test]# cat test.sh 
+#!/bin/bash
+
+exec 0<>/dev/console 1<>/dev/console 2<>/dev/console
+cat <<'msgend'
+Hello! You are in dracut module!
+ ___________________
+< I'm dracut module >
+ -------------------
+   \
+    \
+        .--.
+       |o_o |
+       |:_/ |
+      //   \ \
+     (|     | )
+    /'\_   _/`\
+    \___)=(___/
+msgend
+sleep 10
+echo " continuing...."
+]0;root@localhost:/usr/lib/dracut/modules.d/01test[root@localhost 01test]# vi /etc/default/grub 
+[?1049h[?1h=[1;45r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[45;1H"/etc/default/grub" 7L, 317C[1;1HGRUB_TIMEOUT=1
+GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
+GRUB_DEFAULT=saved
+GRUB_DISABLE_SUBMENU=true
+GRUB_TERMINAL_OUTPUT="console"
+GRUB_CMDLINE_LINUX="no_timer_check console=tty0 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 elevator=noop crashkernel=auto"
+GRUB_DISABLE_RECOVERY="true"
+[94m~                                                                                                                                                                                                [9;1H~                                                                                                                                                                                                [10;1H~                                                                                                                                                                                                [11;1H~                                                                                                                                                                                                [12;1H~                                                                                                                                                                                                [13;1H~                                                                                                                                                                                                [14;1H~                                                                                                                                                                                                [15;1H~                                                                                                                                                                                                [16;1H~                                                                                                                                                                                                [17;1H~                                                                                                                                                                                                [18;1H~                                                                                                                                                                                                [19;1H~                                                                                                                                                                                                [20;1H~                                                                                                                                                                                                [21;1H~                                                                                                                                                                                                [22;1H~                                                                                                                                                                                                [23;1H~                                                                                                                                                                                                [24;1H~                                                                                                                                                                                                [25;1H~                                                                                                                                                                                                [26;1H~                                                                                                                                                                                                [27;1H~                                                                                                                                                                                                [28;1H~                                                                                                                                                                                                [29;1H~                                                                                                                                                                                                [30;1H~                                                                                                                                                                                                [31;1H~                                                                                                                                                                                                [32;1H~                                                                                                                                                                                                [33;1H~                                                                                                                                                                                                [34;1H~                                                                                                                                                                                                [35;1H~                                                                                                                                                                                                [36;1H~                                                                                                                                                                                                [37;1H~                                                                                                                                                                                                [38;1H~                                                                                                                                                                                                [39;1H~                                                                                                                                                                                                [40;1H~                                                                                                                                                                                                [41;1H~                                                                                                                                                                                                [42;1H~                                                                                                                                                                                                [43;1H~                                                                                                                                                                                                [44;1H~                                                                                                                                                                                                [1;1H[?12l[?25h[?25l[m[45;1H[K[45;1H:[?12l[?25hq[?25l[45;1H[K[45;1H[?1l>[?12l[?25h[?1049l]0;root@localhost:/usr/lib/dracut/modules.d/01test[root@localhost 01test]# mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
+/sbin/dracut: line 679: warning: setlocale: LC_MESSAGES: cannot change locale (ru_RU.UTF-8): No such file or directory
+/sbin/dracut: line 680: warning: setlocale: LC_CTYPE: cannot change locale (ru_RU.UTF-8): No such file or directory
+Executing: /sbin/dracut -f -v /boot/initramfs-3.10.0-957.12.2.el7.x86_64.img 3.10.0-957.12.2.el7.x86_64
+dracut module 'busybox' will not be installed, because command 'busybox' could not be found!
+dracut module 'plymouth' will not be installed, because command 'plymouthd' could not be found!
+dracut module 'plymouth' will not be installed, because command 'plymouth' could not be found!
+dracut module 'crypt' will not be installed, because command 'cryptsetup' could not be found!
+dracut module 'dmraid' will not be installed, because command 'dmraid' could not be found!
+dracut module 'dmsquash-live-ntfs' will not be installed, because command 'ntfs-3g' could not be found!
+dracut module 'lvm' will not be installed, because command 'lvm' could not be found!
+dracut module 'mdraid' will not be installed, because command 'mdadm' could not be found!
+dracut module 'multipath' will not be installed, because command 'multipath' could not be found!
+dracut module 'busybox' will not be installed, because command 'busybox' could not be found!
+dracut module 'crypt' will not be installed, because command 'cryptsetup' could not be found!
+dracut module 'dmraid' will not be installed, because command 'dmraid' could not be found!
+dracut module 'dmsquash-live-ntfs' will not be installed, because command 'ntfs-3g' could not be found!
+dracut module 'lvm' will not be installed, because command 'lvm' could not be found!
+dracut module 'mdraid' will not be installed, because command 'mdadm' could not be found!
+dracut module 'multipath' will not be installed, because command 'multipath' could not be found!
+*** Including module: bash ***
+*** Including module: nss-softokn ***
+*** Including module: i18n ***
+*** Including module: kernel-modules ***
+Omitting driver floppy
+*** Including module: qemu ***
+*** Including module: rootfs-block ***
+*** Including module: terminfo ***
+*** Including module: udev-rules ***
+Skipping udev rule: 40-redhat-cpu-hotplug.rules
+Skipping udev rule: 91-permissions.rules
+*** Including module: biosdevname ***
+*** Including module: systemd ***
+*** Including module: usrmount ***
+*** Including module: base ***
+*** Including module: fs-lib ***
+*** Including module: shutdown ***
+*** Including modules done ***
+*** Installing kernel module dependencies and firmware ***
+*** Installing kernel module dependencies and firmware done ***
+*** Resolving executable dependencies ***
+*** Resolving executable dependencies done***
+*** Hardlinking files ***
+*** Hardlinking files done ***
+*** Stripping files ***
+*** Stripping files done ***
+*** Generating early-microcode cpio image contents ***
+*** No early-microcode cpio image needed ***
+*** Store current command line parameters ***
+*** Creating image file ***
+*** Creating image file done ***
+*** Creating initramfs image file '/boot/initramfs-3.10.0-957.12.2.el7.x86_64.img' done ***
+]0;root@localhost:/usr/lib/dracut/modules.d/01test[root@localhost 01test]# vi /boot/grub2/
+device.map  fonts/      grub.cfg    grubenv     i386-pc/    locale/     
+[root@localhost 01test]# vi /boot/grub2/grub.cfg 
+[?1049h[?1h=[1;45r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[45;1H"/boot/grub2/grub.cfg" 127L, 3399C[1;1H#
+# DO NOT EDIT THIS FILE
+#
+# It is automatically generated by grub2-mkconfig using templates
+# from /etc/grub.d and settings from /etc/default/grub
+#
+
+### BEGIN /etc/grub.d/00_header ###
+set pager=1
+
+if [ -s $prefix/grubenv ]; then
+  load_env
+fi
+if [ "${next_entry}" ] ; then
+   set default="${next_entry}"
+   set next_entry=
+   save_env next_entry
+   set boot_once=true
+else
+   set default="${saved_entry}"
+fi
+
+if [ x"${feature_menuentry_id}" = xy ]; then
+  menuentry_id_option="--id"
+else
+  menuentry_id_option=""
+fi
+
+export menuentry_id_option
+
+if [ "${prev_saved_entry}" ]; then
+  set saved_entry="${prev_saved_entry}"
+  save_env saved_entry
+  set prev_saved_entry=
+  save_env prev_saved_entry
+  set boot_once=true
+fi
+
+function savedefault {
+  if [ -z "${boot_once}" ]; then
+    saved_entry="${chosen}"
+    save_env saved_entry
+  fi
+}[1;1H[?12l[?25h
+
+
+
+
+
+[?25l[27m[m[H[2J[1;3Hfi
+}
+
+function load_video {
+  if [ x$feature_all_video_module = xy ]; then
+    insmod all_video
+  else
+    insmod efi_gop
+    insmod efi_uga
+    insmod ieee1275_fb
+    insmod vbe
+    insmod vga
+    insmod video_bochs
+    insmod video_cirrus
+  fi
+}
+
+terminal_output console
+if [ x$feature_timeout_style = xy ] ; then
+  set timeout_style=menu
+  set timeout=1
+# Fallback normal timeout code in case the timeout_style feature is
+# unavailable.
+else
+  set timeout=1
+fi
+### END /etc/grub.d/00_header ###
+
+### BEGIN /etc/grub.d/00_tuned ###
+set tuned_params=""
+set tuned_initrd=""
+### END /etc/grub.d/00_tuned ###
+
+### BEGIN /etc/grub.d/01_users ###
+if [ -f ${prefix}/user.cfg ]; then
+  source ${prefix}/user.cfg
+  if [ -n "${GRUB2_PASSWORD}" ]; then
+    set superusers="root"
+    export superusers
+    password_pbkdf2 root ${GRUB2_PASSWORD}
+  fi
+fi
+### END /etc/grub.d/01_users ###[1;3H[?12l[?25h[?25l[27m[m[H[2J[1;1H### END /etc/grub.d/01_users ###
+
+### BEGIN /etc/grub.d/10_linux ###
+menuentry 'CentOS Linux (3.10.0-957.12.2.el7.x86_64) 7 (Core)' --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option 'gnulinux-3.10.0-957.12.2.el7.x86_64-aa[5;1Hdvanced-8ac075e3-1124-4bb6-bef7-a6811bf8b870' {[6;9Hload_video[7;9Hset gfxpayload=keep[8;9Hinsmod gzio[9;9Hinsmod part_msdos[10;9Hinsmod xfs[11;9Hset root='hd0,msdos1'[12;9Hif [ x$feature_platform_search_hint = xy ]; then[13;11Hsearch --no-floppy --fs-uuid --set=root --hint='hd0,msdos1'  8ac075e3-1124-4bb6-bef7-a6811bf8b870[14;9Helse[15;11Hsearch --no-floppy --fs-uuid --set=root 8ac075e3-1124-4bb6-bef7-a6811bf8b870[16;9Hfi[17;9Hlinux16 /boot/vmlinuz-3.10.0-957.12.2.el7.x86_64 root=UUID=8ac075e3-1124-4bb6-bef7-a6811bf8b870 ro no_timer_check console=tty0 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 elevatoo[18;1Hr=noop crashkernel=auto LANG=en_US.UTF-8[19;9Hinitrd16 /boot/initramfs-3.10.0-957.12.2.el7.x86_64.img
+}
+
+### END /etc/grub.d/10_linux ###
+
+### BEGIN /etc/grub.d/20_linux_xen ###
+### END /etc/grub.d/20_linux_xen ###
+
+### BEGIN /etc/grub.d/20_ppc_terminfo ###
+### END /etc/grub.d/20_ppc_terminfo ###
+
+### BEGIN /etc/grub.d/30_os-prober ###
+### END /etc/grub.d/30_os-prober ###
+
+### BEGIN /etc/grub.d/40_custom ###
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
+### END /etc/grub.d/40_custom ###
+
+### BEGIN /etc/grub.d/41_custom ###
+if [ -f  ${config_directory}/custom.cfg ]; then
+  source ${config_directory}/custom.cfg
+elif [ -z "${config_directory}" -a -f  $prefix/custom.cfg ]; then
+  source $prefix/custom.cfg;
+fi[1;1H[?12l[?25h[?25l[1;44r[1;1H[L[1;45r[1;1Hfi[?12l[?25h
+
+
+
+[7;8H[8;8H[9;8H[10;8H[11;8H[12;8H[13;8H[14;8H[15;8H[16;8H[17;8H[18;8H[20;8H[?25l[45;1H[1m-- INSERT --[20;1H[?12l[?25h[18;1H
+
+[18;1H[8C[mlinux16 /boot/vmlinuz-3.10.0-957.12.2.el7.x86_64 root=UUID=8ac075e3-1124-4b6 /boot/vmlinu6 /boot/vmlin[45;1H[K[18;17H[?25l[?12l[?25h[?25l[45;1H:[?12l[?25hq[?25l[45;1H[K[45;1H[?1l>[?12l[?25h[?1049l]0;root@localhost:/usr/lib/dracut/modules.d/01test[root@localhost 01test]# exit
+exit
+]0;vagrant@localhost:~[vagrant@localhost ~]$ exit
+logout
+Connection to 127.0.0.1 closed.
+]0;ivan@ivna-pc: ~/gitprojects/turbo-fire/HW6[01;32mivan@ivna-pc[00m:[01;34m~/gitprojects/turbo-fire/HW6[00m$ exit
+exit
+
+Script done on 2020-03-09 15:13:31+0300
