@@ -1,0 +1,17 @@
+Vagrant.configure("2") do |config|
+	config.vm.box = "looklikethatguy/centos7-5"
+	
+	#Созадаём и монтируем каталоги в хостовой и гостевой ОС
+	config.vm.synced_folder "./vagrantshare", "/mnt/vagrantshare", create: "true", type: "virtualbox"
+	
+	config.vm.provider "virtualbox" do |v|
+		#Количество ОЗУ для ВМ
+		v.memory = "2048"
+        
+		#Количество CPU для ВМ
+		v.cpus = "2"
+		
+		#Имя ВМ в окружении Vagrant
+		v.name = "centos7-5"
+	end
+end
