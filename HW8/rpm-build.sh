@@ -15,7 +15,7 @@ wget https://www.openssl.org/source/latest.tar.gz && tar -xvf latest.tar.gz
 yum-builddep rpmbuild/SPECS/nginx.spec -y
 
 # Скачиваем подготовленный файл спецификаций, в котором указан путь к openssl
-wget  -O rpmbuild/SPECS/nginx.spec -r
+wget https://github.com/looklikethatguy/otus012020/raw/master/HW8/nginx.spec -O rpmbuild/SPECS/nginx.spec -r
 
 # Собираем пакет
 rpmbuild -bb rpmbuild/SPECS/nginx.spec
@@ -29,12 +29,10 @@ systemctl start nginx
 mkdir /usr/share/nginx/html/repo
 cp rpmbuild/RPMS/x86_64/nginx-1.14.1-1.el7_4.ngx.x86_64.rpm /usr/share/nginx/html/repo/
 wget http://www.percona.com/downloads/percona-release/redhat/0.1-6/percona-release-0.1-6.noarch.rpm -O /usr/share/nginx/html/repo/percona-release-0.1-6.noarch.rpm
-
-# Инициализация репозитория
 createrepo /usr/share/nginx/html/repo/
 
 # Кладём конфиг nginx со включенным автоиндексом и перезапускаем сервис
-wget  -O /etc/nginx/conf.d/default.conf -r
+wget https://github.com/looklikethatguy/otus012020/raw/master/HW8/default.conf -O /etc/nginx/conf.d/default.conf -r
 nginx -t
 nginx -s reload
 
@@ -44,3 +42,6 @@ echo 'name=otus-linux'\n >> /etc/yum.repos.d/otus.repo
 echo 'baseurl=http://localhost/repo'\n >> /etc/yum.repos.d/otus.repo
 echo 'gpgcheck=0'\n >> /etc/yum.repos.d/otus.repo
 echo 'enabled=1'\n >> /etc/yum.repos.d/otus.repo
+
+# Устанавливаем пакет percona из локального репозитория
+yum install percona-release -y
