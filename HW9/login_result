@@ -1,0 +1,133 @@
+Script started on 2020-03-17 19:02:44+0300
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ exitssh ivan@ useradd day && useradd night && useradd friday[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cu root [K[19@do apt purge yandex-disk[C root [Ksh ivan@ useradd day && useradd night && useradd friday[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cu root [K[19@do apt purge yandex-disk[C[11Pyandex-disk stopsudo apt autoremove [18@purge vagrant virtualbox-6.1[C[18Pautoremove[C[4Pyandex-disk stopsudo apt purge yandex-disk  root [Ksh ivan@ useradd day && useradd night && useradd friday[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K[Ksudo bash -c "sed -i 's/^PasswordAuthentication.*$/PasswordAuthenttication yes/' /etc/ssh/sshd_config && systemctl restart sshd.service"[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[A]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[Kssh day@35.228.68.185
+day@35.228.68.185's password: 
+]0;day@instance-2:~[?1034h[day@instance-2 ~]$ whoami 
+day
+]0;day@instance-2:~[day@instance-2 ~]$ exit
+logout
+Connection to 35.228.68.185 closed.
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ ssh day@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185n@35.228.68.185i@35.228.68.185g@35.228.68.185h@35.228.68.185t@35.228.68.185
+night@35.228.68.185's password: 
+Connection closed by 35.228.68.185 port 22
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ ssh night@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185f@35.228.68.185r@35.228.68.185i@35.228.68.185d@35.228.68.185a@35.228.68.185y@35.228.68.185
+friday@35.228.68.185's password: 
+]0;friday@instance-2:~[?1034h[friday@instance-2 ~]$ date 
+Вт мар 17 16:04:44 UTC 2020
+]0;friday@instance-2:~[friday@instance-2 ~]$ whi[Koami 
+friday
+]0;friday@instance-2:~[friday@instance-2 ~]$ exit
+logout
+Connection to 35.228.68.185 closed.
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ exit 
+exit
+
+Script done on 2020-03-17 19:05:22+0300
+Script started on 2020-03-17 19:05:47+0300
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ exit ssh friday@35.228.68.185
+friday@35.228.68.185's password: 
+Permission denied, please try again.
+friday@35.228.68.185's password: 
+Connection closed by 35.228.68.185 port 22
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ exit
+exit
+
+Script done on 2020-03-17 19:06:11+0300
+Script started on 2020-03-17 19:11:53+0300
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ exitssh friday@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185d@35.228.68.185a@35.228.68.185y@35.228.68.185
+day@35.228.68.185's password: 
+Last login: Tue Mar 17 16:03:38 2020 from 85.174.204.118
+]0;day@instance-2:~[?1034h[day@instance-2 ~]$ whoami 
+day
+]0;day@instance-2:~[day@instance-2 ~]$ exit
+logout
+Connection to 35.228.68.185 closed.
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ ssh day@35.228.68.185exit[Kssh friday@35.228.68.185
+friday@35.228.68.185's password: 
+/usr/local/bin/test_login.sh failed: exit code 1
+Connection closed by 35.228.68.185 port 22
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ ssh friday@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185n@35.228.68.185i@35.228.68.185g@35.228.68.185h@35.228.68.185t@35.228.68.185
+night@35.228.68.185's password: 
+/usr/local/bin/test_login.sh failed: exit code 1
+Connection closed by 35.228.68.185 port 22
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ exit
+exit
+
+Script done on 2020-03-17 19:12:39+0300
+Script started on 2020-03-17 19:15:12+0300
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ exitssh night@35.228.68.185friday@35.228.68.185[3Pday@35.228.68.185
+day@35.228.68.185's password: 
+Last login: Tue Mar 17 16:12:06 2020 from 85.174.204.118
+]0;day@instance-2:~[?1034h[day@instance-2 ~]$ whoai[Kmi 
+day
+]0;day@instance-2:~[day@instance-2 ~]$ exit
+logout
+Connection to 35.228.68.185 closed.
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ exit
+exit
+
+Script done on 2020-03-17 19:15:31+0300
+Script started on 2020-03-17 19:18:15+0300
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ exitssh day@35.228.68.185
+day@35.228.68.185's password: 
+Last login: Tue Mar 17 16:15:18 2020 from 85.174.204.118
+]0;day@instance-2:~[?1034h[day@instance-2 ~]$ ncat -l -p 80
+Ncat: bind to :::80: Permission denied. QUITTING.
+]0;day@instance-2:~[day@instance-2 ~]$ capsh --print
+Current: =
+Bounding set =cap_chown,cap_dac_override,cap_dac_read_search,cap_fowner,cap_fsetid,cap_kill,cap_setgid,cap_setuid,cap_setpcap,cap_linux_immutable,cap_net_bind_service,cap_net_broadcast,cap_net_admin,cap_net_raw,cap_ipc_lock,cap_ipc_owner,cap_sys_module,cap_sys_rawio,cap_sys_chroot,cap_sys_ptrace,cap_sys_pacct,cap_sys_admin,cap_sys_boot,cap_sys_nice,cap_sys_resource,cap_sys_time,cap_sys_tty_config,cap_mknod,cap_lease,cap_audit_write,cap_audit_control,cap_setfcap,cap_mac_override,cap_mac_admin,cap_syslog,35,36
+Securebits: 00/0x0/1'b0
+ secure-noroot: no (unlocked)
+ secure-no-suid-fixup: no (unlocked)
+ secure-keep-caps: no (unlocked)
+uid=1001(day)
+gid=1002(day)
+groups=1002(day)
+]0;day@instance-2:~[day@instance-2 ~]$ exit
+logout
+Connection to 35.228.68.185 closed.
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ ssh day@35.228.68.185
+day@35.228.68.185's password: 
+Last login: Tue Mar 17 16:18:21 2020 from 85.174.204.118
+]0;day@instance-2:~[?1034h[day@instance-2 ~]$ exitcapsh --print
+Current: = cap_net_bind_service+i
+Bounding set =cap_chown,cap_dac_override,cap_dac_read_search,cap_fowner,cap_fsetid,cap_kill,cap_setgid,cap_setuid,cap_setpcap,cap_linux_immutable,cap_net_bind_service,cap_net_broadcast,cap_net_admin,cap_net_raw,cap_ipc_lock,cap_ipc_owner,cap_sys_module,cap_sys_rawio,cap_sys_chroot,cap_sys_ptrace,cap_sys_pacct,cap_sys_admin,cap_sys_boot,cap_sys_nice,cap_sys_resource,cap_sys_time,cap_sys_tty_config,cap_mknod,cap_lease,cap_audit_write,cap_audit_control,cap_setfcap,cap_mac_override,cap_mac_admin,cap_syslog,35,36
+Securebits: 00/0x0/1'b0
+ secure-noroot: no (unlocked)
+ secure-no-suid-fixup: no (unlocked)
+ secure-keep-caps: no (unlocked)
+uid=1001(day)
+gid=1002(day)
+groups=1002(day)
+]0;day@instance-2:~[day@instance-2 ~]$ capsh --printexit[Kcapsh --printncat -l -p 80
+^C
+]0;day@instance-2:~[day@instance-2 ~]$ ^C
+]0;day@instance-2:~[day@instance-2 ~]$ ^C
+]0;day@instance-2:~[day@instance-2 ~]$ exit
+logout
+Connection to 35.228.68.185 closed.
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ exit
+exit
+
+Script done on 2020-03-17 19:25:17+0300
+Script started on 2020-03-17 19:26:06+0300
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ exitssh day@35.228.68.185exit[Kssh day@35.228.68.185
+day@35.228.68.185's password: 
+Last login: Tue Mar 17 16:22:17 2020 from 85.174.204.118
+]0;day@instance-2:~[?1034h[day@instance-2 ~]$ sudo -i
+
+Мы полагаем, что ваш системный администратор изложил вам основы
+безопасности. Как правило, всё сводится к трём следующим правилам:
+
+    №1) Уважайте частную жизнь других.
+    №2) Думайте, прежде что-то вводить.
+    №3) С большой властью приходит большая ответственность.
+
+[sudo] пароль для day: 
+]0;day@instance-2:~[day@instance-2 ~]$ exit
+logout
+Connection to 35.228.68.185 closed.
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ exit
+exit
+
+Script done on 2020-03-17 19:27:24+0300

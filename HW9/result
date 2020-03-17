@@ -1,0 +1,460 @@
+Script started on 2020-03-17 18:55:05+0300
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ ssh ivan-pc @[K[K[K[K[K~[K@35.228.68.185
+Last login: Tue Mar 17 15:46:22 2020 from 85.174.204.118
+
+]0;ivan@instance-2:~[?1034h[ivan@instance-2 ~]$ sudo su
+]0;root@instance-2:/home/ivan[?1034h[root@instance-2 ivan]# cd ~
+]0;root@instance-2:~[root@instance-2 ~]# ll
+итого 0
+]0;root@instance-2:~[root@instance-2 ~]# useradd day && usea[Kradd nih[Kght && useradd friday
+]0;root@instance-2:~[root@instance-2 ~]# echo "Otus2019"|sudo passwd --stdin day && echo "Otus2019" | sudo passwd --stdi 
+n night && echo "Otus2019" | sudo passwd --stdin friday
+Изменяется пароль пользователя day.
+passwd: все данные аутентификации успешно обновлены.
+Изменяется пароль пользователя night.
+passwd: все данные аутентификации успешно обновлены.
+Изменяется пароль пользователя friday.
+passwd: все данные аутентификации успешно обновлены.
+]0;root@instance-2:~[root@instance-2 ~]# sudo bash -c "sed -i 's/^PasswordAuthentication.*$/PasswordAuthentication yes/' 
+ /etc/ssh/sshd_config && systemctl restart sshd.service"
+]0;root@instance-2:~[root@instance-2 ~]# nano /etc/security/time.conf 
+[?1049h[1;30r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.3.1                Файл: /etc/security/time.conf                                       [3;1H(B[m# this is an example configuration file for the pam_time module. Its syntax
+[4d# was initially based heavily on that of the shadow package (shadow-960129).
+[5d#
+[6d# the syntax of the lines is as follows:
+[7d#
+[8d#	services;ttys;users;times
+[9d#
+[10d# white space is ignored and lines maybe extended with '\\n' (escaped
+[11d# newlines). As should be clear from reading these comments,
+[12d# text following a '#' is ignored to the end of the line.
+[13d#
+[14d# the combination of individual users/terminals etc is a logic list
+[15d# namely individual tokens that are optionally prefixed with '!' (logical
+[16d# not) and separated with '&' (logical and) and '|' (logical or).
+[17d#
+[18d# services
+[19d#	is a logic list of PAM service names that the rule applies to.
+[20d#
+[21d# ttys
+[22d#	is a logic list of terminal names that this rule applies to.
+[23d#
+[24d# users
+[25d#	is a logic list of users or a netgroup of users to whom this
+[26d#	rule applies.
+[27d#[28;40H(B[0;7m[ Прочитано 65 строк ]
+[29d^G(B[m Помощь	(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр	(B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц
+[30d(B[0;7m^X(B[m Выход[30;17H(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр	(B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь
+[3d[4d[5d[6d[7d[8d[9d[10d[11d[12d[13d[14d[15d[16d[17d[18d[19d[20d[21d[22d[23d[24d[25d[26d[27d7[3;27r8[13S[1;30r[15;1H# NB. For these items the simple wildcard '*' may be used only once.
+[16d#
+[17d# times
+[18d#	the format here is a logic list of day/time-range
+[19d#	entries the days are specified by a sequence of two character
+[20d#	entries, MoTuSa for example is Monday Tuesday and Saturday. Note
+[21d#	that repeated days are unset MoMo = no day, and MoWk = all weekdays
+[22d#	bar Monday. The two character combinations accepted are
+[23d#
+[24d#[24;17HMo Tu We Th Fr Sa Su Wk Wd Al
+[25d#
+[26d#	the last two being week-end days and all 7 days of the week
+[27d#	respectively. As a final example, AlFr means all days except Friday.
+[15d[28d[K[16d[17d[18d[19d[20d[21d[22d[23d[24d[25d[26d[27d7[3;28r8[28d[13S[1;30r[15;1H#
+[16d#	each day/time-range can be prefixed with a '!' to indicate "anything
+[17d#	but"
+[18d#
+[19d#	The time-range part is two 24-hour times HHMM separated by a hyphen
+[20d#	indicating the start and finish time (if the finish time is smaller
+[21d#	than the start time it is deemed to apply on the following day).
+[22d#
+[23d# for a rule to be active, ALL of service+ttys+users must be satisfied
+[24d# by the applying process.
+[25d#
+[27d#
+[15d[16d[17d[18d[19d[20d[21d[22d[23d[24d[25d[26d[27d7[3;28r8[28d[13S[1;30r[15;1H# Here is a simple example: running blank on tty* (any ttyXXX device),
+[16d# the users 'you' and 'me' are denied service all of the time
+[17d#
+[19d#blank;tty* & !ttyp*;you|me;!Al0000-2400
+[21d# Another silly example, user 'root' is denied xsh access
+[22d# from pseudo terminals at the weekend and on mondays.
+[24d#xsh;ttyp*;root;!WdMo0000-2400
+[26d#
+[27d# End of example file.
+[15d[16d[17d[18d[19d[20d[21d[22d[23d[24d[25d[26d[27d7[3;28r8[28d[13S[1;30r[15;1H#
+[16d[A[A[A[A[13d[14d[15d[16d[1;92H(B[0;7mИзменён
+[16d(B[m*;*;day.;
+	 
+	 ;Al0800-2000[Z
+	;*;day	Al0800-	000
+[17d[16;20H
+[17d*;*;night;!Al0800-2000
+[18d*;*;friday;Fr
+[28d(B[0;7mИмя файла для записи: /etc/security/time.conf                                                       [29;17H(B[m         (B[0;7mM-D(B[m Формат DOS   	  (B[0;7mM-A(B[m Доп. в начало        (B[0;7mM-B(B[m Резерв. копия[30;2H(B[0;7mC(B[m Отмена	         (B[0;7mM-M(B[m Формат Mac [30;49H  (B[0;7mM-P(B[m Доп. в конец[K[28;46H[1;92H[39;49m(B[0;7m       [28;39H(B[m[1K (B[0;7m[ Записано 68 строк ](B[m[K[29;17H(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр      (B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц[K[30;2H(B[0;7mX(B[m Выход 	(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр      (B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь[18;14H
+[29d[J[30;100H[30;1H[?1049l
+[?1l>]0;root@instance-2:~[root@instance-2 ~]# nano e/[K[Ke[K/etc/pam.d/sshd 
+[?1049h[1;30r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.3.1                   Файл: /etc/pam.d/sshd                                            [3;1H(B[m#%PAM-1.0
+[4dauth	   required     pam_sepermit.so
+[5dauth	   substack     password-auth
+[6dauth	   include	postlogin
+[7d# Used with polkit to reauthorize users in remote sessions
+[8d-auth	   optional     pam_reauthorize.so prepare
+[9daccount    required     pam_nologin.so
+[10daccount    include	password-auth
+[11dpassword   include	password-auth
+[12d# pam_selinux.so close should be the first session rule
+[13dsession    required     pam_selinux.so close
+[14dsession    required     pam_loginuid.so
+[15d# pam_selinux.so open should only be followed by sessions to be executed in the user context
+[16dsession    required     pam_selinux.so open env_params
+[17dsession    required     pam_namespace.so
+[18dsession    optional     pam_keyinit.so force revoke
+[19dsession    include	password-auth
+[20dsession    include	postlogin
+[21d# Used with polkit to reauthorize users in remote sessions
+[22d-session   optional     pam_reauthorize.so prepare[28;40H(B[0;7m[ Прочитано 20 строк ]
+[29d^G(B[m Помощь	(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр	(B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц
+[30d(B[0;7m^X(B[m Выход[30;17H(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр	(B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь
+[3d[4d[5d[6d[7d[8d[9d[10d[11d[12d[13d[14d[15d[16d[17d[18d[19d[20d[A[A[A[A[A[A[A[A[28d[K[11d[A[A[10d[A[10d[11d[12d[A[A[A[10d7[10;28r8M[1;30r[1;92H(B[0;7mИзменён
+[11d(B[m[Aaccoubt	  nt	[10;17H[10;9H	   reaui   quired    	pam_time.so
+[28d(B[0;7mИмя файла для записи: /etc/pam.d/sshd                                                               [29;17H(B[m         (B[0;7mM-D(B[m Формат DOS   	  (B[0;7mM-A(B[m Доп. в начало        (B[0;7mM-B(B[m Резерв. копия[30;2H(B[0;7mC(B[m Отмена	         (B[0;7mM-M(B[m Формат Mac [30;49H  (B[0;7mM-P(B[m Доп. в конец[K[28;38H[1;92H[39;49m(B[0;7m       [28;39H(B[m[1K (B[0;7m[ Записана 21 строка ](B[m[K[29;17H(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр      (B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц[K[30;2H(B[0;7mX(B[m Выход 	(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр      (B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь[10;36H
+[29d[J[30;100H[30;1H[?1049l
+[?1l>]0;root@instance-2:~[root@instance-2 ~]# nano /etc/pam.d/sshd [8@security/time.conf[C
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[13Pyum install nanonano /etc/security/time.conf 
+[?1049h[1;30r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.3.1                Файл: /etc/security/time.conf                                       [3;1H(B[m# this is an example configuration file for the pam_time module. Its syntax
+[4d# was initially based heavily on that of the shadow package (shadow-960129).
+[5d#
+[6d# the syntax of the lines is as follows:
+[7d#
+[8d#	services;ttys;users;times
+[9d#
+[10d# white space is ignored and lines maybe extended with '\\n' (escaped
+[11d# newlines). As should be clear from reading these comments,
+[12d# text following a '#' is ignored to the end of the line.
+[13d#
+[14d# the combination of individual users/terminals etc is a logic list
+[15d# namely individual tokens that are optionally prefixed with '!' (logical
+[16d# not) and separated with '&' (logical and) and '|' (logical or).
+[17d#
+[18d# services
+[19d#	is a logic list of PAM service names that the rule applies to.
+[20d#
+[21d# ttys
+[22d#	is a logic list of terminal names that this rule applies to.
+[23d#
+[24d# users
+[25d#	is a logic list of users or a netgroup of users to whom this
+[26d#	rule applies.
+[27d#[28;40H(B[0;7m[ Прочитано 68 строк ]
+[29d^G(B[m Помощь	(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр	(B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц
+[30d(B[0;7m^X(B[m Выход[30;17H(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр	(B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь
+[3d[4d[5d[6d[7d[8d[9d[10d[11d[12d[13d[28;39H(B[0;7m[ Неизвестная команда
+[13d(B[m[14d[15d[16d[17d[18d[3d#       rule applies.[K[4;3H[K[5dNB. For these items the simple wildcard '*' may be used only once.[6;3H[K[7dtimes[8d	the format here is a logic list of day/time-range[9;9Hentries the days are specified by a sequence of two character[10;3H      entries, MoTuSa for example is Monday Tuesday and Saturday. Note[11;3H      that repeated days are unset MoMo = no day, and MoWk = all weekdays[12;3H      bar Monday. The two character combinations accepted are[14;3H[14X[14;17HMo Tu We Th Fr Sa Su Wk Wd Al[K[15;3H[K[16d      the last two being week-end days and all 7 days of the week[17;9Hrespectively. As a final example, AlFr means all days except Friday.[18;3H[K[19d	each day/time-range can be prefixed with a '!' to indicate "anything[20;9Hbut"[21;3H[K[22d	The time-range part is two 24-hour times HHMM separated by a hyphen[23;9Hindicating the start and finish time (if the finish time is smaller[24;3H      than the start time it is deemed to apply on the following day).[25;9H[K[26;3Hfor a[14Gto be active, ALL of service+ttys+users must be satisfied[27;3Hby the applying process.
+[3d# for a[14Gto be active, ALL of service+ttys+users must be satisfied[4;3Hby the applying process.[5;3H[K
+[6d[K[7d# [K[8dHere is a simple example: running blank on tty* (any ttyXXX device),[9;3Hthe users 'you' and 'me' are denied service all of the time[K[10;9H[K
+[11d[K[12d#blank;tty* & !ttyp*;you|me;!Al0000-2400[K
+[13d[K[14d# Another silly example, user 'root' is denied xsh access[15;3Hfrom pseudo terminals at the weekend and on mondays.
+[16d[K[17d#xsh;ttyp*;root;!WdMo0000-2400[K
+[18d[K[19;9H[K[20;3HEnd of example file.
+[22d*;*;day;Al0800-2000[K
+[23d*;*;night;!Al0800-2000[K
+[24d*;*;friday;Fr[K
+[25d[K[26d[K[27d[K[3d[25d[A*;*;fri	ay;Fr[1;92H(B[0;7mИзменён[24;13H(B[m  п
+[28d[K[24;13H Пт
+[28d(B[0;7mИмя файла для записи: /etc/security/time.conf                                                       [29;17H(B[m         (B[0;7mM-D(B[m Формат DOS   	  (B[0;7mM-A(B[m Доп. в начало        (B[0;7mM-B(B[m Резерв. копия[30;2H(B[0;7mC(B[m Отмена	         (B[0;7mM-M(B[m Формат Mac [30;49H  (B[0;7mM-P(B[m Доп. в конец[K[28;46H[1;92H[39;49m(B[0;7m       [28;39H(B[m[1K (B[0;7m[ Записано 68 строк ](B[m[K[29;17H(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр      (B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц[K[30;2H(B[0;7mX(B[m Выход 	(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр      (B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь[24;14H
+[29d[J[30;100H[30;1H[?1049l
+[?1l>]0;root@instance-2:~[root@instance-2 ~]# nano /etc/security/time.conf [8Ppam.d/sshd[C
+[?1049h[1;30r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.3.1                   Файл: /etc/pam.d/sshd                                            [3;1H(B[m#%PAM-1.0
+[4dauth	   required     pam_sepermit.so
+[5dauth	   substack     password-auth
+[6dauth	   include	postlogin
+[7d# Used with polkit to reauthorize users in remote sessions
+[8d-auth	   optional     pam_reauthorize.so prepare
+[9daccount    required     pam_nologin.so
+[10daccount    required     pam_time.so
+[11daccount    include	password-auth
+[12dpassword   include	password-auth
+[13d# pam_selinux.so close should be the first session rule
+[14dsession    required     pam_selinux.so close
+[15dsession    required     pam_loginuid.so
+[16d# pam_selinux.so open should only be followed by sessions to be executed in the user context
+[17dsession    required     pam_selinux.so open env_params
+[18dsession    required     pam_namespace.so
+[19dsession    optional     pam_keyinit.so force revoke
+[20dsession    include	password-auth
+[21dsession    include	postlogin
+[22d# Used with polkit to reauthorize users in remote sessions
+[23d-session   optional     pam_reauthorize.so prepare[28;39H(B[0;7m[ Прочитана 21 строка ]
+[29d^G(B[m Помощь	(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр	(B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц
+[30d(B[0;7m^X(B[m Выход[30;17H(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр	(B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь
+[3d[4d[5d[6d[7d[8d[9d[10d[11d[12d[A[Aaccount	   req
+[28d[K[10;16H	red    	pam_tim	[1;92H(B[0;7mИзменён[10;32H(B[m.so[K[Z.so[K[31G.so[K.so[Ke.sox.so[31Ge.so[Zc.so[Z.so
+[11da
+[10;36H  /usr/local/bin/test_login.sh
+[28d(B[0;7mИмя файла для записи: /etc/pam.d/sshd                                                               [29;17H(B[m         (B[0;7mM-D(B[m Формат DOS   	  (B[0;7mM-A(B[m Доп. в начало        (B[0;7mM-B(B[m Резерв. копия[30;2H(B[0;7mC(B[m Отмена	         (B[0;7mM-M(B[m Формат Mac [30;49H  (B[0;7mM-P(B[m Доп. в конец[K[28;38H[1;92H[39;49m(B[0;7m       [28;39H(B[m[1K (B[0;7m[ Записана 21 строка ](B[m[K[29;17H(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр      (B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц[K[30;2H(B[0;7mX(B[m Выход 	(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр      (B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь[10;66H
+[29d[J[30;100H[30;1H[?1049l
+[?1l>]0;root@instance-2:~[root@instance-2 ~]# nano /usr/local/bin/test_login.sh
+[?1049h[1;30r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.3.1               Файл: /usr/local/bin/test_login.sh                                   [28;44H[ Новый файл ]
+[29d^G(B[m Помощь	(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр	(B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц
+[30d(B[0;7m^X(B[m Выход[30;17H(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр	(B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь
+[3d[1;92H(B[0;7mИзменён
+[4d(B[mif [ $PAM_USER = "day" ]; then[5;3Hif [ $is_day_hours -eq 0 ]; then[6;7Hexit 0[7;5Helse[8dexit 1[9;3Hfi
+[10dfi
+[12dif [ $PAM_USER = "night" ]; then[13;3Hif [ $is_day_hours -eq 1 ]; then[14;7Hexit 0[15;5Helse[16dexit 1[17;3Hfi
+[18dfi
+[28d[K[18dfi[A[A[A[A[A[A
+[A[Afi[A[A[A[A[A[A
+[A[2;27r[2;1H[13T[1;30r[3;1H#!/bin/bash
+[5dif [ $PAM_USER = "friday" ]; then[6;3Hif [ $(date +%a) = "Fri" ]; then[7;7Hexit 0[8;5Helse[9dexit 1[10;3Hfi
+[11dfi
+[13dhour=$(date +%H)
+[15dis_day_hours=$(($(test $hour -ge 8; echo $?)+$(test $hour -lt 20; echo $?)))
+is
+[A[Aho
+[A[Afi[A[A[A[A[A[A
+[A[A#!
+[28d(B[0;7mИмя файла для записи: /usr/local/bin/test_login.sh                                                  [29;17H(B[m         (B[0;7mM-D(B[m Формат DOS   	  (B[0;7mM-A(B[m Доп. в начало        (B[0;7mM-B(B[m Резерв. копия[30;2H(B[0;7mC(B[m Отмена	         (B[0;7mM-M(B[m Формат Mac [30;49H  (B[0;7mM-P(B[m Доп. в конец[K[28;51H[1;92H[39;49m(B[0;7m       [28;39H(B[m[1K (B[0;7m[ Записано 29 строк ](B[m[K[29;17H(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр      (B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц[K[30;2H(B[0;7mX(B[m Выход 	(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр      (B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь[3;3H
+[29d[J[30;100H[30;1H[?1049l
+[?1l>]0;root@instance-2:~[root@instance-2 ~]# nano /usr/local/bin/test_login.sh
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1P[1P /usr/local/bin/test_login.sh
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cc /usr/local/bin/test_login.sh
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ch /usr/local/bin/test_login.sh
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cm /usr/local/bin/test_login.sh
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Co /usr/local/bin/test_login.sh
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cd /usr/local/bin/test_login.sh
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C /usr/local/bin/test_login.sh
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C+ /usr/local/bin/test_login.shx /usr/local/bin/test_login.shx /usr/local/bin/test_login.sh[1P /usr/local/bin/test_login.sh
+]0;root@instance-2:~[root@instance-2 ~]# for pkg in epel-release pam_script; do yum; install -y $pkg; done[C[1P
+Загружены модули: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: ftp.man.poznan.pl
+ * epel: ftp.lysator.liu.se
+ * extras: centos.den.host-engine.com
+ * updates: centos.mirror.ate.info
+Пакет epel-release-7-12.noarch уже установлен, и это последняя версия.
+Выполнять нечего
+Загружены модули: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: ftp.man.poznan.pl
+ * epel: ftp.lysator.liu.se
+ * extras: centos.den.host-engine.com
+ * updates: centos.mirror.ate.info
+Разрешение зависимостей
+--> Проверка сценария
+---> Пакет pam_script.x86_64 0:1.1.8-1.el7 помечен для установки
+--> Проверка зависимостей окончена
+
+Зависимости определены
+
+====================================================================================================
+ Package                  Архитектура          Версия                      Репозиторий        Размер
+====================================================================================================
+Установка:
+ pam_script               x86_64               1.1.8-1.el7                 epel                28 k
+
+Итого за операцию
+====================================================================================================
+Установить  1 пакет
+
+Объем загрузки: 28 k
+Объем изменений: 62 k
+Downloading packages:
+
+pam_script-1.1.8-1.el7.x86_64.rpm   0% [                          ]  0.0 B/s |    0 B  --:--:-- ETA 
+
+pam_script-1.1.8-1.el7.x86_64.rpm                                            |  28 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+
+  Установка   : pam_script-1.1.8-1.el7.x86_64 [                                               ] 1/1
+  Установка   : pam_script-1.1.8-1.el7.x86_64 [##                                             ] 1/1
+  Установка   : pam_script-1.1.8-1.el7.x86_64 [###                                            ] 1/1
+  Установка   : pam_script-1.1.8-1.el7.x86_64 [##############                                 ] 1/1
+  Установка   : pam_script-1.1.8-1.el7.x86_64 [###########################                    ] 1/1
+  Установка   : pam_script-1.1.8-1.el7.x86_64 [#######################################        ] 1/1
+  Установка   : pam_script-1.1.8-1.el7.x86_64 [#########################################      ] 1/1
+  Установка   : pam_script-1.1.8-1.el7.x86_64 [###########################################    ] 1/1
+  Установка   : pam_script-1.1.8-1.el7.x86_64 [#############################################  ] 1/1
+  Установка   : pam_script-1.1.8-1.el7.x86_64 [############################################## ] 1/1
+  Установка   : pam_script-1.1.8-1.el7.x86_64                                                   1/1 
+
+  Проверка    : pam_script-1.1.8-1.el7.x86_64                                                   1/1 
+
+Установлено:
+  pam_script.x86_64 0:1.1.8-1.el7                                                                   
+
+Выполнено!
+]0;root@instance-2:~[root@instance-2 ~]# for pkg in epel-release pam_script; do yum install -y $pkg; done[1@;[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[28Pchmod +x /usr/local/bin/test_login.sh
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4Pnano[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[12Petc/pam.d/sshd 
+[?1049h[1;30r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.3.1                   Файл: /etc/pam.d/sshd                                            [3;1H(B[m#%PAM-1.0
+[4dauth	   required     pam_sepermit.so
+[5dauth	   substack     password-auth
+[6dauth	   include	postlogin
+[7d# Used with polkit to reauthorize users in remote sessions
+[8d-auth	   optional     pam_reauthorize.so prepare
+[9daccount    required     pam_nologin.so
+[10daccount    required     pam_exec.so  /usr/local/bin/test_login.sh
+[11daccount    include	password-auth
+[12dpassword   include	password-auth
+[13d# pam_selinux.so close should be the first session rule
+[14dsession    required     pam_selinux.so close
+[15dsession    required     pam_loginuid.so
+[16d# pam_selinux.so open should only be followed by sessions to be executed in the user context
+[17dsession    required     pam_selinux.so open env_params
+[18dsession    required     pam_namespace.so
+[19dsession    optional     pam_keyinit.so force revoke
+[20dsession    include	password-auth
+[21dsession    include	postlogin
+[22d# Used with polkit to reauthorize users in remote sessions
+[23d-session   optional     pam_reauthorize.so prepare[28;39H(B[0;7m[ Прочитана 21 строка ]
+[29d^G(B[m Помощь	(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр	(B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц
+[30d(B[0;7m^X(B[m Выход[30;17H(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр	(B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь
+[3d[4d[5d[6d[7d[8d[9d[10daccount	   requ	r
+[28d[K[10;19Hd    	pam_exe	[1;92H(B[0;7mИзменён[10;32H(B[m[1P[1P[1P[1Ps.so  /usr/local/bin/test_login.sh[10;30Hc.so  /usr/local/bin/test_login.sh[10;31Hr.so  /usr/local/bin/test_login.sh[10;32Hi.so  /usr/local/bin/test_login.sh[10;33Hp.so  /usr/local/bin/test_login.sh[10;34Ht.so  /usr/local/bin/test_login.sh[10;35H
+[28d(B[0;7mИмя файла для записи: /etc/pam.d/sshd                                                               [29;17H(B[m         (B[0;7mM-D(B[m Формат DOS   	  (B[0;7mM-A(B[m Доп. в начало        (B[0;7mM-B(B[m Резерв. копия[30;2H(B[0;7mC(B[m Отмена	         (B[0;7mM-M(B[m Формат Mac [30;49H  (B[0;7mM-P(B[m Доп. в конец[K[28;38H[1;92H[39;49m(B[0;7m       [28;39H(B[m[1K (B[0;7m[ Записана 21 строка ](B[m[K[29;17H(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр      (B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц[K[30;2H(B[0;7mX(B[m Выход 	(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр      (B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь[10;35H
+[29d[J[30;100H[30;1H[?1049l
+[?1l>]0;root@instance-2:~[root@instance-2 ~]# yum install nmap-ncat -y
+Загружены модули: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: ftp.man.poznan.pl
+ * epel: ftp.lysator.liu.se
+ * extras: centos.den.host-engine.com
+ * updates: centos.mirror.ate.info
+Разрешение зависимостей
+--> Проверка сценария
+---> Пакет nmap-ncat.x86_64 2:6.40-19.el7 помечен для установки
+--> Обработка зависимостей: libpcap.so.1()(64bit) пакета: 2:nmap-ncat-6.40-19.el7.x86_64
+--> Проверка сценария
+---> Пакет libpcap.x86_64 14:1.5.3-11.el7 помечен для установки
+--> Проверка зависимостей окончена
+
+Зависимости определены
+
+====================================================================================================
+ Package                Архитектура         Версия                          Репозиторий       Размер
+====================================================================================================
+Установка:
+ nmap-ncat              x86_64              2:6.40-19.el7                   base              206 k
+Установка зависимостей:
+ libpcap                x86_64              14:1.5.3-11.el7                 base              138 k
+
+Итого за операцию
+====================================================================================================
+Установить  1 пакет (+1 зависимый)
+
+Объем загрузки: 344 k
+Объем изменений: 740 k
+Downloading packages:
+
+(1/2): libpcap-1.5.3-11.el7.x86_64.rpm                                       | 138 kB  00:00:00     
+
+(2/2): nmap-ncat-6.40-19.el7.x86_64 87% [=====================-   ]  0.0 B/s | 300 kB  --:--:-- ETA 
+
+(2/2): nmap-ncat-6.40-19.el7.x86_64.rpm                                      | 206 kB  00:00:00     
+----------------------------------------------------------------------------------------------------
+Общий размер                                                        583 kB/s | 344 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+
+  Установка   : 14:libpcap-1.5.3-11.el7.x86_64 [                                              ] 1/2
+  Установка   : 14:libpcap-1.5.3-11.el7.x86_64 [#########                                     ] 1/2
+  Установка   : 14:libpcap-1.5.3-11.el7.x86_64 [##################                            ] 1/2
+  Установка   : 14:libpcap-1.5.3-11.el7.x86_64 [###########################                   ] 1/2
+  Установка   : 14:libpcap-1.5.3-11.el7.x86_64 [####################################          ] 1/2
+  Установка   : 14:libpcap-1.5.3-11.el7.x86_64 [#####################################         ] 1/2
+  Установка   : 14:libpcap-1.5.3-11.el7.x86_64 [#########################################     ] 1/2
+  Установка   : 14:libpcap-1.5.3-11.el7.x86_64 [###########################################   ] 1/2
+  Установка   : 14:libpcap-1.5.3-11.el7.x86_64 [############################################# ] 1/2
+  Установка   : 14:libpcap-1.5.3-11.el7.x86_64                                                  1/2 
+
+  Установка   : 2:nmap-ncat-6.40-19.el7.x86_64 [                                              ] 2/2
+  Установка   : 2:nmap-ncat-6.40-19.el7.x86_64 [######                                        ] 2/2
+  Установка   : 2:nmap-ncat-6.40-19.el7.x86_64 [#############                                 ] 2/2
+  Установка   : 2:nmap-ncat-6.40-19.el7.x86_64 [####################                          ] 2/2
+  Установка   : 2:nmap-ncat-6.40-19.el7.x86_64 [###########################                   ] 2/2
+  Установка   : 2:nmap-ncat-6.40-19.el7.x86_64 [##################################            ] 2/2
+  Установка   : 2:nmap-ncat-6.40-19.el7.x86_64 [########################################      ] 2/2
+  Установка   : 2:nmap-ncat-6.40-19.el7.x86_64 [##########################################    ] 2/2
+  Установка   : 2:nmap-ncat-6.40-19.el7.x86_64 [###########################################   ] 2/2
+  Установка   : 2:nmap-ncat-6.40-19.el7.x86_64 [############################################  ] 2/2
+  Установка   : 2:nmap-ncat-6.40-19.el7.x86_64 [############################################# ] 2/2
+  Установка   : 2:nmap-ncat-6.40-19.el7.x86_64                                                  2/2 
+
+  Проверка    : 2:nmap-ncat-6.40-19.el7.x86_64                                                  1/2 
+
+  Проверка    : 14:libpcap-1.5.3-11.el7.x86_64                                                  2/2 
+
+Установлено:
+  nmap-ncat.x86_64 2:6.40-19.el7                                                                    
+
+Установлены зависимости:
+  libpcap.x86_64 14:1.5.3-11.el7                                                                    
+
+Выполнено!
+]0;root@instance-2:~[root@instance-2 ~]# sudo set e[K[Ken[K[K[K[K[K[K[K[K[K[Ksetenforce 0
+]0;root@instance-2:~[root@instance-2 ~]# setenforce 0yum install nmap-ncat -y
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3Pnano /etc/pam.d/sshd for pkg in epel-release pam_script; do yum install -y $pkg; done
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cnano /etc/pam.d/sshd [K
+[?1049h[1;30r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.3.1                   Файл: /etc/pam.d/sshd                                            [3;1H(B[m#%PAM-1.0
+[4dauth	   required     pam_sepermit.so
+[5dauth	   substack     password-auth
+[6dauth	   include	postlogin
+[7d# Used with polkit to reauthorize users in remote sessions
+[8d-auth	   optional     pam_reauthorize.so prepare
+[9daccount    required     pam_nologin.so
+[10daccount    required     pam_script.so  /usr/local/bin/test_login.sh
+[11daccount    include	password-auth
+[12dpassword   include	password-auth
+[13d# pam_selinux.so close should be the first session rule
+[14dsession    required     pam_selinux.so close
+[15dsession    required     pam_loginuid.so
+[16d# pam_selinux.so open should only be followed by sessions to be executed in the user context
+[17dsession    required     pam_selinux.so open env_params
+[18dsession    required     pam_namespace.so
+[19dsession    optional     pam_keyinit.so force revoke
+[20dsession    include	password-auth
+[21dsession    include	postlogin
+[22d# Used with polkit to reauthorize users in remote sessions
+[23d-session   optional     pam_reauthorize.so prepare[28;39H(B[0;7m[ Прочитана 21 строка ]
+[29d^G(B[m Помощь	(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр	(B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц
+[30d(B[0;7m^X(B[m Выход[30;17H(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр	(B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь
+[3d[4d[5d[6d[7d[A[7d7[7;27r8M[1;30r[1;92H(B[0;7mИзменён
+[8d(B[m[Aauth   	   reaui  
+[28d[K[7;15H quired    	pam_cap.so
+[28d(B[0;7mИмя файла для записи: /etc/pam.d/sshd                                                               [29;17H(B[m         (B[0;7mM-D(B[m Формат DOS   	  (B[0;7mM-A(B[m Доп. в начало        (B[0;7mM-B(B[m Резерв. копия[30;2H(B[0;7mC(B[m Отмена	         (B[0;7mM-M(B[m Формат Mac [30;49H  (B[0;7mM-P(B[m Доп. в конец[K[28;38H[1;92H[39;49m(B[0;7m       [28;39H(B[m[1K (B[0;7m[ Записано 22 строки ](B[m[K[29;17H(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр      (B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц[K[30;2H(B[0;7mX(B[m Выход 	(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр      (B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь[7;35H
+[29d[J[30;100H[30;1H[?1049l
+[?1l>]0;root@instance-2:~[root@instance-2 ~]# nano /etc/sev[Kcurity/capability.conf
+[?1049h[1;30r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.3.1              Файл: /etc/security/capability.conf                                   [28;44H[ Новый файл ]
+[29d^G(B[m Помощь	(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр	(B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц
+[30d(B[0;7m^X(B[m Выход[30;17H(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр	(B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь
+[3d[1;92H(B[0;7mИзменён
+[3d(B[mcap_net_bind_service
+[4dday
+[28d[K[4dd
+[3;21Hday
+[4d[K[3;21H day
+[28d(B[0;7mИмя файла для записи: /etc/security/capability.conf                                                 [29;17H(B[m         (B[0;7mM-D(B[m Формат DOS   	  (B[0;7mM-A(B[m Доп. в начало        (B[0;7mM-B(B[m Резерв. копия[30;2H(B[0;7mC(B[m Отмена	         (B[0;7mM-M(B[m Формат Mac [30;49H  (B[0;7mM-P(B[m Доп. в конец[K[28;52H[1;92H[39;49m(B[0;7m       [28;39H(B[m[1K (B[0;7m[ Записана 1 строка ](B[m[K[29;17H(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр      (B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц[K[30;2H(B[0;7mX(B[m Выход 	(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр      (B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь[3;22H
+[29d[J[30;100H[30;1H[?1049l
+[?1l>]0;root@instance-2:~[root@instance-2 ~]# setcap cap_net_bind_service=ei
+usage: setcap [-q] [-v] (-r|-|<caps>) <filename> [ ... (-r|-|<capsN>) <filenameN> ]
+
+ Note <filename> must be a regular (non-symlink) file.
+]0;root@instance-2:~[root@instance-2 ~]# setcap cap_net_bind_service=ei /usr/bin/ncat
+]0;root@instance-2:~[root@instance-2 ~]# [H[2J[root@instance-2 ~]# usermod -G whe[K[K[K.[Kwheel day
+]0;root@instance-2:~[root@instance-2 ~]# usermod -G wheel day[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kman [K[K[K[Ksetcap cap_net_bind_service=ei /usr/bin/ncat[K
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cnano /etc/security/capability.conf
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4Psetcap cap_net_bind_service=ei /usr/bin/ncat
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kusermod -G whh[Keel day
+]0;root@instance-2:~[root@instance-2 ~]# exit
+exit
+]0;ivan@instance-2:~[ivan@instance-2 ~]$ exit
+logout
+Connection to 35.228.68.185 closed.
+
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ exit
+exit
+
+Script done on 2020-03-17 19:31:23+0300
