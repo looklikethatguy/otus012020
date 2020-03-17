@@ -5,28 +5,22 @@
 ### ДЗ
 
 Создал группу admin:
-`groupadd admin`
+- `groupadd admin`
 
 Создал пользователей для демонстрации возможности входа:
-```
-useradd -p pass -s /bin/bash user1 - входит в группу admin
-useradd -p pass -s /bin/bash user2 - не входит в группу admin
-```
+- `useradd -p pass -s /bin/bash user1` - входит в группу admin
+- `useradd -p pass -s /bin/bash user2` - не входит в группу admin
 
 Добавил в группу admin существующих пользователей:
-`usermod -aG admin user1`
+- `usermod -aG admin user1`
 
-Включаем модуль pam_time.so. В файл /etc/pam.d/sshd, где нужно указать 
-```
-...
-account  required pam_time.so
-...
-```
+Включаем модуль `pam_time.so`. В файл `/etc/pam.d/sshd`, где нужно указать: 
+- `account  required pam_time.so`
+
 Правим `/etc/security/time.conf`, в который добавляем:
-```
-sshd;*;!admin;Wd
-login;*;!admin;Wd
-```
+- `sshd;*;!admin;Wd`
+- `login;*;!admin;Wd`
+
 Результат записан в файле `hw_result`.
 
 ### Практика
@@ -34,9 +28,9 @@ login;*;!admin;Wd
 
 Создал пользователей:
 
--”day” - имеет удаленный доступ каждый день с 8 до 20
--“night” - с 20 до 8
--“friday” - в любое время, если сегодня пятница
+- ”day” - имеет удаленный доступ каждый день с 8 до 20
+- “night” - с 20 до 8
+- “friday” - в любое время, если сегодня пятница
 
 Разрешил поключение по SSH с логином и паролем (в `/etc/ssh/sshd_config` изменить `PasswordAuthentication yes`).
 
@@ -56,21 +50,13 @@ login;*;!admin;Wd
 **NB** Учитывая, что в тестовой среде консоль была полностью русифицирована, то эффекта от добавления последней строки с указанием дня недели в формате `Fr` не последовало. В моём частном случае пришлось указывать русскоязычный аналог `Пт`. Это наглядно демонстрируется в файлах результата, когда сначала под учётной записью `friday` был выполнен успешных вход в систему, а после изменения параметров в `time.conf` войти уже было нельзя.
 
 Для включения модуля необходимо внести изменения в файл /etc/pam.d/sshd, где нужно указать 
-```
-...
-account  required pam_time.so
-...
-```
+- `account  required pam_time.so`
 
 ### 2. Модуль pam_exec
-Для этого примера используется скрипт `[test_login.sh][1]`.
+Для этого примера используется скрипт [test_login.sh](https://gist.github.com/dmitry-lyutenko/39bf8afe5d1f6fc2d48b09c325706495).
 
 Для использования скрипта, нужно внести изменения в файл `/etc/pam.d/sshd`:
-```
-...
-account	required pam_exec.so /usr/local/bin/test_login.sh
-...
-```
+- `account	required pam_exec.so /usr/local/bin/test_login.sh`
 
 При запуске скрипта PAM-модулем будет передана переменная окружения `PAM_USER`, содержащая имя пользователя. Скрипт содержит простую логику: если имя пользователя `friday`, то проверям день недели, если пятница, то возвращаем 0, если нет, то 1 и завершаем скрипт.
 
@@ -82,33 +68,25 @@ account	required pam_exec.so /usr/local/bin/test_login.sh
 
 ### 3. Модуль pam_script
 Для успешной демонстрации этого способа нужно отключить SELinux (так можно делать только в тестовой среде!):
-`sudo setenforce 0`
+- `sudo setenforce 0`
 
 Данный модуль не входит в базовую систему и должен быть установлен отдельно:
-`for pkg in epel-release pam_script; do yum install -y $pkg; done`
+- `for pkg in epel-release pam_script; do yum install -y $pkg; done`
 
 По сравнению с предыдущим примером в файле `/etc/pam.d/sshd` нужно просто переименовать `pam_exec` в `pam_script`:
-```
-...
-account required pam_script.so /usr/local/bin/test_login.sh
-...
-```
+- `account required pam_script.so /usr/local/bin/test_login.sh`
 
 Для демонстрации работы модуля установим дополнительный пакет `nmap-ncat`. При выполнении команды `ncat -l -p 80` пользователем `day` мы получим ошибку, поскольку прав на прослушивание порта у него нет. Для обеспечения такой возможности, будем использовать модуль `pam_cap`, для чего в файле `/etc/pam.d/sshd` добавим:
-```
-...
-auth required pam_cap.so
-...
-```
+- `auth required pam_cap.so`
 
 и создадим файл `/etc/security/capability.conf`, содержащий строку
-`cap_net_bind_service day`
+ -`cap_net_bind_service day`
 
 Так же необходимо программе `/usr/bin/ncat` выдать разрешение на данное действие:
-`setcap cap_net_bind_service=ei /usr/bin/ncat`
+- `setcap cap_net_bind_service=ei /usr/bin/ncat`
 
 После повторного входа в систему, пользователь `day` при вызове команды `ncat -l -p 80` больше не будет получать ошибку, а при вызове `capsh --print`, можно увидеть добавленный нами `capability`:
-`Current: = cap_net_bind_service+i`
+- `Current: = cap_net_bind_service+i`
 
 ### 4. Права администратора
 
@@ -120,12 +98,11 @@ auth required pam_cap.so
 Поскольку сам имел отрицательный опыт редактирования файла `/etc/sudoers`, когда один случайный лишний символ ломал файл, настоятельно рекомендую сам себе использовать только первый способ и только в случае невозможности его применять, прибегать ко второму, оставив третий, самый опасный, для крайних случаев.
 
 В первом достаточно выполнить команду:
-`usermod -G wheel day`
+- `usermod -G wheel day`
 
 Во втором создать файл `/etc/sudoers.d/day` со строками:
-`day ALL=(ALL) ALL` - будет запрашивать пароль пользователя при вызове sudo
+- `day ALL=(ALL) ALL` - будет запрашивать пароль пользователя при вызове sudo
 или
-`day ALL=(ALL) NOPASSWD: ALL` - не будет запрашивать пароль пользователя при вызове sudo.
+- `day ALL=(ALL) NOPASSWD: ALL` - не будет запрашивать пароль пользователя при вызове sudo.
 
-[PAM time help][http://linux-pam.org/Linux-PAM-html/sag-pam_time.html]
-[1]: https://gist.github.com/dmitry-lyutenko/39bf8afe5d1f6fc2d48b09c325706495
+**[PAM time help](http://linux-pam.org/Linux-PAM-html/sag-pam_time.html)**
