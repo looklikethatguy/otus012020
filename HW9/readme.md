@@ -2,6 +2,34 @@
 - Запретить всем пользователям, кроме группы admin логин в выходные (суббота и воскресенье), без учета праздников.
 - *дать конкретному пользователю права работать с докером и возможность рестартить докер сервис.
 
+### ДЗ
+
+Создал группу admin:
+`groupadd admin`
+
+Создал пользователей для демонстрации возможности входа:
+```
+useradd -p pass -s /bin/bash user1 - входит в группу admin
+useradd -p pass -s /bin/bash user2 - не входит в группу admin
+```
+
+Добавил в группу admin существующих пользователей:
+`usermod -aG admin user1`
+
+Включаем модуль pam_time.so. В файл /etc/pam.d/sshd, где нужно указать 
+```
+...
+account  required pam_time.so
+...
+```
+Правим `/etc/security/time.conf`, в который добавляем:
+```
+sshd;*;!admin;Wd
+login;*;!admin;Wd
+```
+Результат записан в файле `hw_result`.
+
+### Практика
 Результат проделанных изменений находится в файле `result`, а результаты попыток входа и демонстрация возможностей пользователей в файле `login_result`.
 
 Создал пользователей:
@@ -99,4 +127,5 @@ auth required pam_cap.so
 или
 `day ALL=(ALL) NOPASSWD: ALL` - не будет запрашивать пароль пользователя при вызове sudo.
 
+[PAM time help][http://linux-pam.org/Linux-PAM-html/sag-pam_time.html]
 [1]: https://gist.github.com/dmitry-lyutenko/39bf8afe5d1f6fc2d48b09c325706495

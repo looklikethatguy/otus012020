@@ -1,0 +1,301 @@
+Script started on 2020-03-17 21:17:26+0300
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ ssh ivan@35.228.68.185[14Pgit pushssh ivan@35.228.68.185
+Last login: Tue Mar 17 18:17:16 2020 from 31.181.135.127
+
+]0;ivan@instance-2:~[?1034h[ivan@instance-2 ~]$ sudo su
+]0;root@instance-2:/home/ivan[?1034h[root@instance-2 ivan]# cd ~
+]0;root@instance-2:~[root@instance-2 ~]# ll
+итого 0
+]0;root@instance-2:~[root@instance-2 ~]# groupadd admimn[K[Kn
+]0;root@instance-2:~[root@instance-2 ~]# useradd -p pass -s /bin/bash user1
+]0;root@instance-2:~[root@instance-2 ~]# useradd -p pass -s /bin/bash user1[C[C[C[C[C[C[C[K2
+]0;root@instance-2:~[root@instance-2 ~]# usermod -aG admin user1
+]0;root@instance-2:~[root@instance-2 ~]# groups user1
+user1 : user1 admin
+]0;root@instance-2:~[root@instance-2 ~]# nano /etc/pam.d/sshd 
+[?1049h[1;30r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.3.1                   Файл: /etc/pam.d/sshd                                            [3;1H(B[m#%PAM-1.0
+[4dauth	   required     pam_sepermit.so
+[5dauth	   substack     password-auth
+[6dauth	   include	postlogin
+[7dauth	   required     pam_cap.so
+[8d# Used with polkit to reauthorize users in remote sessions
+[9d-auth	   optional     pam_reauthorize.so prepare
+[10daccount    required     pam_nologin.so
+[11daccount    required     pam_script.so  /usr/local/bin/test_login.sh
+[12daccount    include	password-auth
+[13dpassword   include	password-auth
+[14d# pam_selinux.so close should be the first session rule
+[15dsession    required     pam_selinux.so close
+[16dsession    required     pam_loginuid.so
+[17d# pam_selinux.so open should only be followed by sessions to be executed in the user context
+[18dsession    required     pam_selinux.so open env_params
+[19dsession    required     pam_namespace.so
+[20dsession    optional     pam_keyinit.so force revoke
+[21dsession    include	password-auth
+[22dsession    include	postlogin
+[23d# Used with polkit to reauthorize users in remote sessions
+[24d-session   optional     pam_reauthorize.so prepare[28;39H(B[0;7m[ Прочитано 22 строки ]
+[29d^G(B[m Помощь	(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр	(B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц
+[30d(B[0;7m^X(B[m Выход[30;17H(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр	(B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь
+[3d[4d[5d[6d[7d[8d[9d[10d[11d[12d[A[A[11d[12d[A[A[11daccount	 
+[28d[K[11;11H requ	red    	pam_s[1;92H(B[0;7mИзменён[11;29H(B[m[1P[1P[1P[1P[1P[1Pt.so  /usr/local/bin/test_login.sh[11;30Hi.so  /usr/local/bin/test_login.sh[11;31Hm.so  /usr/local/bin/test_login.sh[11;32He.so  /usr/local/bin/test_login.sh[11;33H.so[1P[1P[1P[1P[1P[1P[1P[1P[1Po[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1Poin.sh[K[36Gn.sh[K.sh[Ksh[Kh[K 
+[28d(B[0;7mИмя файла для записи: /etc/pam.d/sshd                                                               [29;17H(B[m         (B[0;7mM-D(B[m Формат DOS   	  (B[0;7mM-A(B[m Доп. в начало        (B[0;7mM-B(B[m Резерв. копия[30;2H(B[0;7mC(B[m Отмена	         (B[0;7mM-M(B[m Формат Mac [30;49H  (B[0;7mM-P(B[m Доп. в конец[K[28;38H[1;92H[39;49m(B[0;7m       [28;39H(B[m[1K (B[0;7m[ Записано 22 строки ](B[m[K[29;17H(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр      (B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц[K[30;2H(B[0;7mX(B[m Выход 	(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр      (B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь[11;36H
+[29d[J[30;100H[30;1H[?1049l
+[?1l>]0;root@instance-2:~[root@instance-2 ~]# nano /etc/security/time.conf 
+[?1049h[1;30r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.3.1                Файл: /etc/security/time.conf                                       [3;1H(B[m# this is an example configuration file for the pam_time module. Its syntax
+[4d# was initially based heavily on that of the shadow package (shadow-960129).
+[5d#
+[6d# the syntax of the lines is as follows:
+[7d#
+[8d#	services;ttys;users;times
+[9d#
+[10d# white space is ignored and lines maybe extended with '\\n' (escaped
+[11d# newlines). As should be clear from reading these comments,
+[12d# text following a '#' is ignored to the end of the line.
+[13d#
+[14d# the combination of individual users/terminals etc is a logic list
+[15d# namely individual tokens that are optionally prefixed with '!' (logical
+[16d# not) and separated with '&' (logical and) and '|' (logical or).
+[17d#
+[18d# services
+[19d#	is a logic list of PAM service names that the rule applies to.
+[20d#
+[21d# ttys
+[22d#	is a logic list of terminal names that this rule applies to.
+[23d#
+[24d# users
+[25d#	is a logic list of users or a netgroup of users to whom this
+[26d#	rule applies.
+[27d#[28;40H(B[0;7m[ Прочитано 68 строк ]
+[29d^G(B[m Помощь	(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр	(B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц
+[30d(B[0;7m^X(B[m Выход[30;17H(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр	(B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь
+[3d[4d[5d[6d[7d[8d[9d[10d[11d[12d[13d[14d[15d[16d[17d[18d[19d[20d[21d[22d[23d[24d[25d[26d[27d7[3;27r8[13S[1;30r[15;1H# NB. For these items the simple wildcard '*' may be used only once.
+[16d#
+[17d# times
+[18d#	the format here is a logic list of day/time-range
+[19d#	entries the days are specified by a sequence of two character
+[20d#	entries, MoTuSa for example is Monday Tuesday and Saturday. Note
+[21d#	that repeated days are unset MoMo = no day, and MoWk = all weekdays
+[22d#	bar Monday. The two character combinations accepted are
+[23d#
+[24d#[24;17HMo Tu We Th Fr Sa Su Wk Wd Al
+[25d#
+[26d#	the last two being week-end days and all 7 days of the week
+[27d#	respectively. As a final example, AlFr means all days except Friday.
+[15d[28d[K[16d[17d[18d[A[A[A[A[15d[16d[17d[18d[19d[20d[21d[22d[23d[24d[25d[26d[27d7[3;28r8[28d[13S[1;30r[15;1H#
+[16d#	each day/time-range can be prefixed with a '!' to indicate "anything
+[17d#	but"
+[18d#
+[19d#	The time-range part is two 24-hour times HHMM separated by a hyphen
+[20d#	indicating the start and finish time (if the finish time is smaller
+[21d#	than the start time it is deemed to apply on the following day).
+[22d#
+[23d# for a rule to be active, ALL of service+ttys+users must be satisfied
+[24d# by the applying process.
+[25d#
+[27d#
+[15d[16d[17d[18d[19d[20d[21d[22d[23d[24d[25d[26d[27d7[3;28r8[28d[13S[1;30r[15;1H# Here is a simple example: running blank on tty* (any ttyXXX device),
+[16d# the users 'you' and 'me' are denied service all of the time
+[17d#
+[19d#blank;tty* & !ttyp*;you|me;!Al0000-2400
+[21d# Another silly example, user 'root' is denied xsh access
+[22d# from pseudo terminals at the weekend and on mondays.
+[24d#xsh;ttyp*;root;!WdMo0000-2400
+[26d#
+[27d# End of example file.
+[15d[16d[17d[18d[19d[20d[21d[22d[23d[24d[25d[26d[27d7[3;28r8[28d[13S[1;30r[15;1H#
+[16d*;*;day;Al0800-2000
+[17d*;*;night;!Al0800-2000
+[18d*;*;friday;Пт
+[15d[16d[17d[18d[A[18d[19d[A[A[A[A[16d[16;28r[28;1H
+[1;30r[1;92H(B[0;7mИзменён
+[16d(B[m[16;28r[28;1H
+[1;30r[16;1H[K[A[A[A[A[A[A[A[A[A[A[A[A[A[2;27r[2;1H[13T[1;30r[3;1H#	each day/time-range can be prefixed with a '!' to indicate "anything
+[4d#	but"
+[5d#
+[6d#	The time-range part is two 24-hour times HHMM separated by a hyphen
+[7d#	indicating the start and finish time (if the finish time is smaller
+[8d#	than the start time it is deemed to apply on the following day).
+[9d#
+[10d# for a rule to be active, ALL of service+ttys+users must be satisfied
+[11d# by the applying process.
+[12d#
+[14d#
+[15d# Here is a simple example: running blank on tty* (any ttyXXX device),
+[A[A[A[A[A[A[10d[11d[12d[13d[14d[15d[16d[17d[18d[19d[20d[21d[22d[23d[24d[25d[26d[27d7[3;28r8[28d[13S[1;30r[15;1H#
+[16d*
+[Ksshd;*;!admin;Wd
+[17dlogin;*;!admin;Wd
+[28d(B[0;7mИмя файла для записи: /etc/security/time.conf                                                       [29;17H(B[m         (B[0;7mM-D(B[m Формат DOS   	  (B[0;7mM-A(B[m Доп. в начало        (B[0;7mM-B(B[m Резерв. копия[30;2H(B[0;7mC(B[m Отмена	         (B[0;7mM-M(B[m Формат Mac [30;49H  (B[0;7mM-P(B[m Доп. в конец[K[28;46H[1;92H[39;49m(B[0;7m       [28;39H(B[m[1K (B[0;7m[ Записано 67 строк ](B[m[K[29;17H(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр      (B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц[K[30;2H(B[0;7mX(B[m Выход 	(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр      (B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь[17;18H
+[29d[J[30;100H[30;1H[?1049l
+[?1l>]0;root@instance-2:~[root@instance-2 ~]# exit
+exit
+]0;ivan@instance-2:~[ivan@instance-2 ~]$ exit
+logout
+Connection to 35.228.68.185 closed.
+
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ ssh ivan@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185[1P@35.228.68.185u@35.228.68.185s@35.228.68.185e@35.228.68.185r@35.228.68.1851@35.228.68.185
+user1@35.228.68.185's password: 
+Permission denied, please try again.
+
+user1@35.228.68.185's password: 
+Permission denied, please try again.
+
+user1@35.228.68.185's password: 
+user1@35.228.68.185: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password).
+
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ ssh user1@35.228.68.185[1Pivan@35.228.68.185
+Last login: Tue Mar 17 18:17:29 2020 from 31.181.135.127
+
+]0;ivan@instance-2:~[?1034h[ivan@instance-2 ~]$ passwd user1
+passwd: только root может выбрать имя учетной записи.
+]0;ivan@instance-2:~[ivan@instance-2 ~]$ passwd user1[K[K[K[K[K[K[K[K[K[K[K[Ksudo su
+]0;root@instance-2:/home/ivan[?1034h[root@instance-2 ivan]# passwd user1
+Изменяется пароль пользователя user1.
+Новый пароль : 
+НЕУДАЧНЫЙ ПАРОЛЬ: В пароле должно быть не меньше 8 символов
+Повторите ввод нового пароля : 
+passwd: все данные аутентификации успешно обновлены.
+]0;root@instance-2:/home/ivan[root@instance-2 ivan]# exit
+exit
+]0;ivan@instance-2:~[ivan@instance-2 ~]$ w[Kexit
+logout
+Connection to 35.228.68.185 closed.
+
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ ssh ivan@35.228.68.185user1@35.228.68.185
+user1@35.228.68.185's password: 
+Last failed login: Tue Mar 17 18:29:07 UTC 2020 from 31.181.135.127 on ssh:notty
+There were 3 failed login attempts since the last successful login.
+]0;user1@instance-2:~[?1034h[user1@instance-2 ~]$ whoami 
+user1
+]0;user1@instance-2:~[user1@instance-2 ~]$ exit
+logout
+Connection to 35.228.68.185 closed.
+
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ ssh user1@35.228.68.185[1Pivan@35.228.68.185
+Last login: Tue Mar 17 18:29:13 2020 from 31.181.135.127
+
+]0;ivan@instance-2:~[?1034h[ivan@instance-2 ~]$ exitsudo su
+]0;root@instance-2:/home/ivan[?1034h[root@instance-2 ivan]# exitpasswd user1[K2
+Изменяется пароль пользователя user2.
+Новый пароль : 
+НЕУДАЧНЫЙ ПАРОЛЬ: В пароле должно быть не меньше 8 символов
+Повторите ввод нового пароля : 
+passwd: все данные аутентификации успешно обновлены.
+]0;root@instance-2:/home/ivan[root@instance-2 ivan]# exit
+exit
+]0;ivan@instance-2:~[ivan@instance-2 ~]$ exit
+logout
+Connection to 35.228.68.185 closed.
+
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ ssh ivan@35.228.68.185user1@35.228.68.185[1P@35.228.68.1852@35.228.68.185
+user2@35.228.68.185's password: 
+]0;user2@instance-2:~[?1034h[user2@instance-2 ~]$ exit
+logout
+Connection to 35.228.68.185 closed.
+
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ ssh user2@35.228.68.185[1Pivan@35.228.68.185
+Last login: Tue Mar 17 18:32:21 2020 from 31.181.135.127
+
+]0;ivan@instance-2:~[?1034h[ivan@instance-2 ~]$ exitsudo su[3Pexitsudo su[3Pexitsudo su
+]0;root@instance-2:/home/ivan[?1034h[root@instance-2 ivan]# exitpasswd user2[8Pexitpasswd user1[8Pexitnano /etc/security/time.conf [8Ppam.d/sshd[C[8@security/time.conf[C[8Ppam.d/sshd[C
+[?1049h[1;30r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.3.1                   Файл: /etc/pam.d/sshd                                            [3;1H(B[m#%PAM-1.0
+[4dauth	   required     pam_sepermit.so
+[5dauth	   substack     password-auth
+[6dauth	   include	postlogin
+[7dauth	   required     pam_cap.so
+[8d# Used with polkit to reauthorize users in remote sessions
+[9d-auth	   optional     pam_reauthorize.so prepare
+[10daccount    required     pam_nologin.so
+[11daccount    required     pam_time.so
+[12daccount    include	password-auth
+[13dpassword   include	password-auth
+[14d# pam_selinux.so close should be the first session rule
+[15dsession    required     pam_selinux.so close
+[16dsession    required     pam_loginuid.so
+[17d# pam_selinux.so open should only be followed by sessions to be executed in the user context
+[18dsession    required     pam_selinux.so open env_params
+[19dsession    required     pam_namespace.so
+[20dsession    optional     pam_keyinit.so force revoke
+[21dsession    include	password-auth
+[22dsession    include	postlogin
+[23d# Used with polkit to reauthorize users in remote sessions
+[24d-session   optional     pam_reauthorize.so prepare[28;39H(B[0;7m[ Прочитано 22 строки ]
+[29d^G(B[m Помощь	(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр	(B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц
+[30d(B[0;7m^X(B[m Выход[30;17H(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр	(B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь
+[3d[29d[J[30;100H[30;1H[?1049l
+[?1l>]0;root@instance-2:/home/ivan[root@instance-2 ivan]# nano /etc/pam.d/sshd exit[Kpasswd user2[8Pexitpasswd user1[8Pexitnano /etc/security/time.conf 
+[?1049h[1;30r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.3.1                Файл: /etc/security/time.conf                                       [3;1H(B[m# this is an example configuration file for the pam_time module. Its syntax
+[4d# was initially based heavily on that of the shadow package (shadow-960129).
+[5d#
+[6d# the syntax of the lines is as follows:
+[7d#
+[8d#	services;ttys;users;times
+[9d#
+[10d# white space is ignored and lines maybe extended with '\\n' (escaped
+[11d# newlines). As should be clear from reading these comments,
+[12d# text following a '#' is ignored to the end of the line.
+[13d#
+[14d# the combination of individual users/terminals etc is a logic list
+[15d# namely individual tokens that are optionally prefixed with '!' (logical
+[16d# not) and separated with '&' (logical and) and '|' (logical or).
+[17d#
+[18d# services
+[19d#	is a logic list of PAM service names that the rule applies to.
+[20d#
+[21d# ttys
+[22d#	is a logic list of terminal names that this rule applies to.
+[23d#
+[24d# users
+[25d#	is a logic list of users or a netgroup of users to whom this
+[26d#	rule applies.
+[27d#[28;40H(B[0;7m[ Прочитано 67 строк ]
+[29d^G(B[m Помощь	(B[0;7m^O(B[m Записать     (B[0;7m^R(B[m ЧитФайл	(B[0;7m^Y(B[m ПредCтр	(B[0;7m^K(B[m Вырезать     (B[0;7m^C(B[m ТекПозиц
+[30d(B[0;7m^X(B[m Выход[30;17H(B[0;7m^J(B[m Выровнять    (B[0;7m^W(B[m Поиск[30;49H(B[0;7m^V(B[m СледCтр	(B[0;7m^U(B[m ОтмВырезк    (B[0;7m^T(B[m Словарь
+[3d[4d[5d[6d[7d[8d[9d[10d[11d[12d[13d[14d[15d[16d[17d[18d[19d[20d[21d[22d[23d[24d[25d[26d[27d7[3;27r8[13S[1;30r[15;1H# NB. For these items the simple wildcard '*' may be used only once.
+[16d#
+[17d# times
+[18d#	the format here is a logic list of day/time-range
+[19d#	entries the days are specified by a sequence of two character
+[20d#	entries, MoTuSa for example is Monday Tuesday and Saturday. Note
+[21d#	that repeated days are unset MoMo = no day, and MoWk = all weekdays
+[22d#	bar Monday. The two character combinations accepted are
+[23d#
+[24d#[24;17HMo Tu We Th Fr Sa Su Wk Wd Al
+[25d#
+[26d#	the last two being week-end days and all 7 days of the week
+[27d#	respectively. As a final example, AlFr means all days except Friday.
+[15d[28d[K[16d[17d[18d[19d[20d[21d[22d[23d[24d[25d[26d[27d7[3;28r8[28d[13S[1;30r[15;1H#
+[16d#	each day/time-range can be prefixed with a '!' to indicate "anything
+[17d#	but"
+[18d#
+[19d#	The time-range part is two 24-hour times HHMM separated by a hyphen
+[20d#	indicating the start and finish time (if the finish time is smaller
+[21d#	than the start time it is deemed to apply on the following day).
+[22d#
+[23d# for a rule to be active, ALL of service+ttys+users must be satisfied
+[24d# by the applying process.
+[25d#
+[27d#
+[15d[16d[17d[18d[A[A[A[A[A[14d[15d[16d[17d[18d[19d[20d[21d[22d[23d[24d[25d[26d[27d7[3;28r8[28d[13S[1;30r[15;1H# Here is a simple example: running blank on tty* (any ttyXXX device),
+[16d# the users 'you' and 'me' are denied service all of the time
+[17d#
+[19d#blank;tty* & !ttyp*;you|me;!Al0000-2400
+[21d# Another silly example, user 'root' is denied xsh access
+[22d# from pseudo terminals at the weekend and on mondays.
+[24d#xsh;ttyp*;root;!WdMo0000-2400
+[26d#
+[27d# End of example file.
+[15d[16d[17d[18d[19d[20d[21d[22d[23d[24d[25d[26d[27d7[3;28r8[28d[13S[1;30r[15;1H#
+[16dsshd;*;!admin;Wd
+[17dlogin;*;!admin;Wd
+]0;root@instance-2:/home/ivan[root@instance-2 ivan]# exit
+exit
+]0;ivan@instance-2:~[ivan@instance-2 ~]$ exit
+logout
+Connection to 35.228.68.185 closed.
+
+]0;ivan@ivan-pc: ~/Git/otus012020/HW9[01;32mivan@ivan-pc[00m:[01;34m~/Git/otus012020/HW9[00m$ exti[K[Kit
+exit
+
+Script done on 2020-03-17 21:35:33+0300
