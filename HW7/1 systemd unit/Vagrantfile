@@ -1,0 +1,35 @@
+Vagrant.configure("2") do |config|
+	config.vm.box = "centos/7"
+	
+	config.vm.provider "virtualbox" do |v|
+		#Количество ОЗУ для ВМ
+		v.memory = "512"
+        
+		#Количество CPU для ВМ
+		v.cpus = "1"
+		
+		#Имя ВМ в окружении Vagrant
+		v.name = "systemd"
+
+	config.vm.provision "copy-files",
+		type: "file", 
+		preserve_order: true,
+		source: "./config/.", 
+		destination: "~/"
+	
+	config.vm.provision "do-things",
+		type: "shell", 
+		preserve_order: true,
+		inline: <<-SHELL
+		mv /home/vagrant/watchlog /etc/sysconfig
+		mv /home/vagrant/watchlog.sh /opt && chmod +x /opt/watchlog.sh
+		mv /home/vagrant/watchlog.service /etc/systemd/system
+		mv /home/vagrant/watchlog.timer /etc/systemd/system
+		mv /home/vagrant/watchlog.log /var/log		
+		systemctl daemon-reload
+		systemctl start watchlog.timer
+		systemctl start watchlog.service
+		systemctl status watchlog.timer
+		SHELL
+	end
+end
