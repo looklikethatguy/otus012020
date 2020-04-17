@@ -34,3 +34,7 @@
 - переписать(!) скрипт запуска на unit-файл.
 
 Этот пункт не выполнялся!
+
+Много полезного написано в [справке по сервисам](https://www.freedesktop.org/software/systemd/man/systemd.service.html) и [справке по ограничениям](https://www.freedesktop.org/software/systemd/man/systemd.resource-control.html).
+
+Пример юнита для `jira` был взят на [официальном сайте](https://confluence.atlassian.com/jirakb/run-jira-as-a-systemd-service-on-linux-979411854.html).
