@@ -1,24 +1,26 @@
 version: '3.3'
 services:
     nginx:
-        build: ./nginx
+        image: looklikethatguy/nginxphp:v1
+        container_name: nginx
         ports:
             - "80:80"
+        volumes:
+            - ./www:/www
         networks:
-            nginxphp:
-                aliases: 
-                    - nginx.nginxphp
+            - nginxphp
         depends_on:
             - php
     
     php:
-        build: ./php
+        image: looklikethatguy/phpfm:v1
+        container_name: php
+        volumes:
+            - ./www:/www
         ports:
             - "9000:9000"
         networks:
-            nginxphp:
-                aliases:
-                    - php.nginxphp
-
+            - nginxphp
+                
 networks:
     nginxphp:
